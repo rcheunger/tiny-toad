@@ -21,7 +21,7 @@ kCont.keyDownHandler = function(event){
 	}
 	// Reset
 	if(event.keyCode==82){
-		if(!kCont.down && pony.startMoving){
+		if(!kCont.down && toad.startMoving){
 			TTG.pauseGame();
 			TTG.init();
 			TTG.startTheGame();
@@ -31,5 +31,4 @@ kCont.keyDownHandler = function(event){
 }
 kCont.keyUpHandler = function(event){
 	kCont.down = false;
-	//alert("Key Up"); FUcksdsllls
 }

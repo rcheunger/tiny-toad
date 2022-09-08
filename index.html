@@ -65,8 +65,8 @@
 			   <div id="hud_screen">
 					<div style="position:absolute;top:0;right:0;margin:10px;width:150px">
 						<div class="hud_button" id="breset" 
-								ontouchstart="if(pony.startMoving){TTG.pauseGame();TTG.init();TTG.startTheGame();}" 
-								onclick='if(pony.startMoving){TTG.pauseGame();TTG.init();TTG.startTheGame();}'></div>
+								ontouchstart="if(toad.startMoving){TTG.pauseGame();TTG.init();TTG.startTheGame();}" 
+								onclick='if(toad.startMoving){TTG.pauseGame();TTG.init();TTG.startTheGame();}'></div>
 						<div class="hud_button" id="bmusic" 
 								ontouchstart='menu.toggleAudio();'
 								onclick='menu.toggleAudio();'></div>
@@ -113,7 +113,7 @@
 												<div id='score'><span id='stats_velocity'>20</span> kph</div>
 											</div>
 											<div class='stats'>
-												<div id='desc'>$BUGZ collected:</div>
+												<div id='desc'>$BUGZ:</div>
 												<div id='score'><span id='stats_parasprites'>20</span></div>
 											</div>
 											<div class='stats' id='main' style='margin-top:10px;font-size:16px'>

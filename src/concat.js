@@ -105,25 +105,25 @@ HUD.draw = function(){
 }
 
 HUD.enterFrame = function(){
-	if(pony.startMoving){
+	if(toad.startMoving){
 		
 		HUD.awesome *= 3;
-		HUD.awesome += 0.02*(-0.04*pony.coord.y+pony.vel.x*1.2); // Originally 0.04 not 0.02. Halved for better judge of awesome.
+		HUD.awesome += 0.02*(-0.04*toad.coord.y+toad.vel.x*1.2); // Originally 0.04 not 0.02. Halved for better judge of awesome.
 		HUD.awesome *= 0.25;
-		HUD.timer-=(1/(60*30)-pony.vel.x*(1/(60*30))*(1/20));
+		HUD.timer-=(1/(60*30)-toad.vel.x*(1/(60*30))*(1/20));
 		
-		if(HUD.groundvel<pony.vel.x){
-			HUD.groundvel = pony.vel.x;
+		if(HUD.groundvel<toad.vel.x){
+			HUD.groundvel = toad.vel.x;
 		}
-		if(HUD.maxalt < -pony.coord.y){
-			HUD.maxalt = -pony.coord.y;
+		if(HUD.maxalt < -toad.coord.y){
+			HUD.maxalt = -toad.coord.y;
 		} 
 	
 		if(HUD.timer<0){
 			HUD.timer = 0;
 			//alert("YOU LOSE");
 			if(HUD.endTimer==0){
-				if(pony.vel.x<2 && pony.touchGround2){
+				if(toad.vel.x<2 && toad.touchGround2){
 					HUD.endTimer=60;
 				}
 			}else{
@@ -146,7 +146,7 @@ HUD.enterFrame = function(){
 	
 	// POINTS
 	document.getElementById('points').innerHTML = HUD.points+"m";
-	HUD.points = Math.floor(pony.coord.x/100);
+	HUD.points = Math.floor(toad.coord.x/100);
 	if(HUD.points<0){
 		HUD.points=0;
 	}
@@ -181,7 +181,7 @@ kCont.keyDownHandler = function(event){
 	}
 	// Reset
 	if(event.keyCode==82){
-		if(!kCont.down && pony.startMoving){
+		if(!kCont.down && toad.startMoving){
 			TTG.pauseGame();
 			TTG.init();
 			TTG.startTheGame();
@@ -286,68 +286,68 @@ function musicLoopInit(){
 var music_source;
 if (music.canPlayType('audio/mpeg;')) {
     music.type= 'audio/mpeg';
-    music_source = 'music/WinterLoop.mp3';
+    music_source = 'music/Gachitoad.mp3';
 } else {
     music.type= 'audio/ogg';
-    music_source = 'music/WinterLoop.ogg';
+    music_source = 'music/Gachitoad.ogg';
 }
-var pony = {};
-pony.image = new Image(800,600);
+var toad = {};
+toad.image = new Image(800,600);
 
-pony.init = function(){
-	pony.coord = new Object();
-	pony.vel = new Object();
-	pony.coord.x = -10;
-	pony.coord.y = -201;
-	pony.vel.x = 1.9;
-	pony.vel.y = -0.9;
-	pony.rotation = 0;
-	pony.width = pony.height = 200;
-	pony.frame = 0;
+toad.init = function(){
+	toad.coord = new Object();
+	toad.vel = new Object();
+	toad.coord.x = -10;
+	toad.coord.y = -201;
+	toad.vel.x = 1.9;
+	toad.vel.y = -0.9;
+	toad.rotation = 0;
+	toad.width = toad.height = 200;
+	toad.frame = 0;
 	
-	pony.touchGround = true;
-	pony.touchGround2 = true;
-	pony.touchGround3 = false;
-	pony.keyDown = false;
+	toad.touchGround = true;
+	toad.touchGround2 = true;
+	toad.touchGround3 = false;
+	toad.keyDown = false;
 }
-pony.startMoving = false;
+toad.startMoving = false;
 
-pony.draw = function()
+toad.draw = function()
 {
 	// TRANSFORM
 	ctx.save();
-	ctx.translate(0,pony.coord.y);
-	ctx.rotate(pony.rotation);
+	ctx.translate(0,toad.coord.y);
+	ctx.rotate(toad.rotation);
 	if(HUD.timer>0){
-		if(pony.touchGround2){
-			if(pony.keyDown){
-				ctx.drawImage( pony.image, 202, Math.floor(pony.frame)*200+2,196,196, 
+		if(toad.touchGround2){
+			if(toad.keyDown){
+				ctx.drawImage( toad.image, 202, Math.floor(toad.frame)*200+2,196,196, 
 								-200/2, -200+20, 200, 200);
 			}else{
-				ctx.drawImage( pony.image, 2, Math.floor(pony.frame)*200+2,196,196,
+				ctx.drawImage( toad.image, 2, Math.floor(toad.frame)*200+2,196,196,
 								 -200/2, -200+20, 200, 200);
 			}
 		}else{
-			if(HUD.timer>0 && pony.keyDown){
-				ctx.drawImage( pony.image, 602, Math.floor(pony.frame)*200+2,196,196,
+			if(HUD.timer>0 && toad.keyDown){
+				ctx.drawImage( toad.image, 602, Math.floor(toad.frame)*200+2,196,196,
 								 -200/2, -200+20, 200, 200);
 			}else{
-				ctx.drawImage( pony.image, 402, Math.floor(pony.frame)*200+2,196,196,
+				ctx.drawImage( toad.image, 402, Math.floor(toad.frame)*200+2,196,196,
 								-200/2, -200+20, 200, 200);
 			}
 		}
 	}else{
-		if(!pony.touchGround3){
-			if(pony.touchGround2){
-				pony.touchGround3 = true;
+		if(!toad.touchGround3){
+			if(toad.touchGround2){
+				toad.touchGround3 = true;
 				TTG.shake = 100;
 			}
 		}
-		if(pony.touchGround3){
-			ctx.drawImage( pony.image, 800, Math.floor(pony.frame)*200,200,200, 
+		if(toad.touchGround3){
+			ctx.drawImage( toad.image, 800, Math.floor(toad.frame)*200,200,200, 
 							-200/2, -200+20, 200, 200);
 		}else{
-			ctx.drawImage( pony.image, 400, Math.floor(pony.frame)*200,200,200,
+			ctx.drawImage( toad.image, 400, Math.floor(toad.frame)*200,200,200,
 								-200/2, -200+20, 200, 200);
 		}
 	}
@@ -355,14 +355,14 @@ pony.draw = function()
 	ctx.restore();
 }
 
-pony.enterFrame = function()
+toad.enterFrame = function()
 {
 	// KEY
-	pony.keyDown = kCont.down;
-	if(!pony.startMoving){
-		pony.startMoving = pony.keyDown;
+	toad.keyDown = kCont.down;
+	if(!toad.startMoving){
+		toad.startMoving = toad.keyDown;
 		// Play music if not mobile and upon starting game
-		if(pony.keyDown){
+		if(toad.keyDown){
 			if( !gameIsMobile && music.paused ){
 				//music.currentTime = 0;
 				menu.toggleAudio();
@@ -371,86 +371,86 @@ pony.enterFrame = function()
 	}
 	
 	// FRAME
-	pony.frame += (2+pony.vel.x)/60;
-	if(pony.keyDown){
-		pony.frame += 0.2;
+	toad.frame += (2+toad.vel.x)/60;
+	if(toad.keyDown){
+		toad.frame += 0.2;
 	}
-	pony.frame %= 3;
+	toad.frame %= 3;
 	
-	if(pony.startMoving){
+	if(toad.startMoving){
 		
 		// Velocity Addition
 		if(HUD.timer<=0){
-			pony.vel.x*=0.98;
+			toad.vel.x*=0.98;
 		}
-		if(HUD.timer>0 && pony.keyDown){
-			if(pony.touchGround2){
-				if(pony.vel.y>0){
-					pony.vel.y += 0.3; 
-					//pony.vel.x += 0.05; 
+		if(HUD.timer>0 && toad.keyDown){
+			if(toad.touchGround2){
+				if(toad.vel.y>0){
+					toad.vel.y += 0.3; 
+					//toad.vel.x += 0.05; 
 				}else{
-					//pony.vel.y -= 0.05; 
-					pony.vel.x += 0.2; 
-					//pony.vel.x += 0.1; //Should just be pushing fwd
+					//toad.vel.y -= 0.05; 
+					toad.vel.x += 0.2; 
+					//toad.vel.x += 0.1; //Should just be pushing fwd
 				}
 			}else{
-				pony.vel.y += 0.25;
+				toad.vel.y += 0.25;
 			}
 		}else{
-			if(HUD.timer>0 && pony.touchGround2){
-				if(pony.vel.y<0 && pony.vel.x<3){
-					pony.vel.x += 0.05;
+			if(HUD.timer>0 && toad.touchGround2){
+				if(toad.vel.y<0 && toad.vel.x<3){
+					toad.vel.x += 0.05;
 				}
 			}
-			if(HUD.timer<=0 && !pony.touchGround2){
-				pony.vel.y+=0.2;
+			if(HUD.timer<=0 && !toad.touchGround2){
+				toad.vel.y+=0.2;
 			}
-			pony.vel.y += 0.08;
+			toad.vel.y += 0.08;
 		}
 		
 		// Move coords
-		pony.coord.x += pony.vel.x;
-		var terrY = terrain.funct(pony.coord.x);
-		if(pony.touchGround3){
-			pony.coord.y += terrY;
+		toad.coord.x += toad.vel.x;
+		var terrY = terrain.funct(toad.coord.x);
+		if(toad.touchGround3){
+			toad.coord.y += terrY;
 		}else{
-			pony.coord.y += pony.vel.y;
+			toad.coord.y += toad.vel.y;
 		}	
 		// Terrain Update
 		
-		terrain.updateX(pony.coord.x);
+		terrain.updateX(toad.coord.x);
 		
 		// Correct coords
-		/*pony.touchGround = (   ( pony.vel.y>0 && pony.coord.y>terrY-2 )
-	                       || ( pony.vel.y<0 && pony.coord.y>terrY-0.5 )
+		/*toad.touchGround = (   ( toad.vel.y>0 && toad.coord.y>terrY-2 )
+	                       || ( toad.vel.y<0 && toad.coord.y>terrY-0.5 )
 	                       );*/
-	 	//pony.touchGround3 = pony.coord.y>terrY-100;
-	 	pony.touchGround2 = pony.coord.y>terrY-5;
-	 	pony.touchGround = pony.coord.y>terrY;
-		if(pony.touchGround)
+	 	//toad.touchGround3 = toad.coord.y>terrY-100;
+	 	toad.touchGround2 = toad.coord.y>terrY-5;
+	 	toad.touchGround = toad.coord.y>terrY;
+		if(toad.touchGround)
 		{
-			pony.coord.y = terrY;
+			toad.coord.y = terrY;
 			// Slope & Projection
-			var terrSlope = terrain.functDiff(pony.coord.x);
+			var terrSlope = terrain.functDiff(toad.coord.x);
 			var terrLength = Math.sqrt(1*1+terrSlope*terrSlope);
-			var dotProduct = pony.vel.x*1 + pony.vel.y*terrSlope;
+			var dotProduct = toad.vel.x*1 + toad.vel.y*terrSlope;
 			dotProduct = dotProduct/terrLength;
-			pony.vel.x = dotProduct/Math.sqrt(1+terrSlope*terrSlope);
-			if(pony.vel.x<0.1){
-				pony.vel.x=0.1;
+			toad.vel.x = dotProduct/Math.sqrt(1+terrSlope*terrSlope);
+			if(toad.vel.x<0.1){
+				toad.vel.x=0.1;
 			}
-			pony.vel.y = pony.vel.x*terrSlope;
-			pony.vel.x*=0.995;
-			pony.vel.y*=0.995;
+			toad.vel.y = toad.vel.x*terrSlope;
+			toad.vel.x*=0.995;
+			toad.vel.y*=0.995;
 		}else{
-			//pony.coord.y += pony.vel.y;
+			//toad.coord.y += toad.vel.y;
 		}
 		
-		pony.rotation = Math.atan2(pony.vel.y,pony.vel.x);
-		if(pony.rotation>Math.PI*0.3){
-			pony.rotation*=3;
-			pony.rotation+=Math.PI*0.3;
-			pony.rotation*=0.25;
+		toad.rotation = Math.atan2(toad.vel.y,toad.vel.x);
+		if(toad.rotation>Math.PI*0.3){
+			toad.rotation*=3;
+			toad.rotation+=Math.PI*0.3;
+			toad.rotation*=0.25;
 		}
 	
 	}
@@ -469,24 +469,24 @@ TTG.pauseGame = function(){
 }
 TTG.enterFrame = function(){
 	prop.enterFrame();
-	pony.enterFrame();
+	toad.enterFrame();
 	background.enterFrame();
 	HUD.enterFrame();
 	
-	// SCALE / TRANSLATE DEPENDING ON PONY
-	if(pony.startMoving){
+	// SCALE / TRANSLATE DEPENDING ON toad
+	if(toad.startMoving){
 		TTG.gScale*=9;
 		TTG.yDisp*=9;
-		if(pony.coord.y<-100){
-			TTG.yDisp += (pony.coord.y+100)*0.5;
+		if(toad.coord.y<-100){
+			TTG.yDisp += (toad.coord.y+100)*0.5;
 		}else{
 			TTG.yDisp += 0;
 		}
-		if(pony.touchGround3){
+		if(toad.touchGround3){
 			TTG.gScale += 0.7;
 			TTG.yDisp += 100;
 		}else{
-			if(pony.coord.y<-100){
+			if(toad.coord.y<-100){
 				TTG.gScale += 0.30;
 			}else{
 				TTG.gScale += 0.40;
@@ -514,8 +514,8 @@ TTG.draw = function(){
 	
 	background.draw(); // Background
 	prop.draw(); // Props like Trees
-	terrain.draw(pony.coord.x); // Terrain
-	pony.draw(); // Pony Player
+	terrain.draw(toad.coord.x); // Terrain
+	toad.draw(); // toad Player
 	prop.drawParasprites(); // Parasprites
 	HUD.draw(); // HUD
 	
@@ -531,7 +531,7 @@ TTG.init = function(){
 	menu.init();
 	HUD.init();
 	background.init();
-	pony.init();
+	toad.init();
 	terrain.init();
 	prop.init();
 }
@@ -543,7 +543,7 @@ TTG.loadArtAssets = function(){
 		TTG.artAssets -= 4;
 	}
 	
-	pony.image.onload =
+	toad.image.onload =
 	background.cloud.onload = 
 	prop.image.tree.onload = 
 	prop.image.parasprite.onload = 
@@ -551,7 +551,7 @@ TTG.loadArtAssets = function(){
 	HUD.timerImage.onload = 
 		TTG.onAssetLoad;
 	
-	pony.image.src = "art/Toad.png";
+	toad.image.src = "art/Toad.png";
 	prop.image.parasprite.src = "art/Parasprite.png";
 	HUD.timerImage.src = "art/Timer.png";
 	
@@ -692,7 +692,7 @@ terrain.drawFrom = function( starttt, yOff )
 	var tmpTerrYDraw = terrain.funct(starttt-terrain.drawFarBack);
 	ctx.moveTo( 0-terrain.drawFarBack, tmpTerrYDraw+yOff );
 	var i;
-	if(pony.startMoving){
+	if(toad.startMoving){
 		if(gameIsMobile){
 			if(TTG.gScale<0.35){
 				for( i=30-terrain.drawFarBack; i<=1440; i+=75 ){
@@ -751,9 +751,9 @@ prop.init = function(){
 		prop.trees = [{},{},{},{},{},{},{}];
 		prop.treeLength = 3;
 		prop.treePast = 1000;
-		pony.coord.x -= 800;
+		toad.coord.x -= 800;
 		prop.addTrees();
-		pony.coord.x += 800;
+		toad.coord.x += 800;
 	}
 	
 	// PARASPRITES
@@ -770,7 +770,7 @@ prop.addTrees = function(){
 		prop.treeLength = Math.ceil(3+Math.random()*4);
 		prop.treePast = 1000+Math.ceil(Math.random()*2000);
 		for(i=0;i<prop.treeLength;i++){
-			prop.trees[i].x = xxx+pony.coord.x;
+			prop.trees[i].x = xxx+toad.coord.x;
 			prop.trees[i].y = terrain.funct(prop.trees[i].x);
 			prop.trees[i].rotation = Math.atan( terrain.functDiff(prop.trees[i].x) );
 			prop.trees[i].type = Math.floor(Math.random()*3);
@@ -789,7 +789,7 @@ prop.addParasprites = function(){
 	}
 }
 prop.resetParasprite = function(i){
-	prop.parasprites[i].x = prop.parasprites[i].loop+pony.coord.x;
+	prop.parasprites[i].x = prop.parasprites[i].loop+toad.coord.x;
 	prop.parasprites[i].y = -Math.random()*400;
 	prop.parasprites[i].color = Math.floor( Math.random()*4 );
 	prop.parasprites[i].velX = 3+Math.random()*4;
@@ -801,7 +801,7 @@ prop.draw = function(){
 	var i;
 	for(i=0;i<prop.treeLength;i++){
 		ctx.save();
-		ctx.translate( prop.trees[i].x-pony.coord.x, prop.trees[i].y );
+		ctx.translate( prop.trees[i].x-toad.coord.x, prop.trees[i].y );
 		ctx.rotate(prop.trees[i].rotation);
 		ctx.drawImage( prop.image.tree, prop.trees[i].type*200,0,200,170, -200, -280, 400,340);
 		ctx.restore();
@@ -812,7 +812,7 @@ prop.drawParasprites = function(){
 	var i;
 	for(i=0;i<prop.parasprites.length;i++){
 		ctx.save();
-		ctx.translate(prop.parasprites[i].x-pony.coord.x,prop.parasprites[i].y);
+		ctx.translate(prop.parasprites[i].x-toad.coord.x,prop.parasprites[i].y);
 		if(prop.parasprites[i].life==0){
 			ctx.drawImage( prop.image.parasprite, prop.parasprites[i].color*100, Math.floor(prop.parasprites[i].flap)*100,100,100,
 							-50, -50, 100,100);
@@ -828,7 +828,7 @@ prop.drawParasprites = function(){
 // EnterFrame
 prop.enterFrame = function(){
 	if(!gameIsMobile){
-		if(prop.trees[prop.treeLength-1].x-pony.coord.x<-prop.treePast){
+		if(prop.trees[prop.treeLength-1].x-toad.coord.x<-prop.treePast){
 			prop.addTrees();
 		}
 	}
@@ -838,16 +838,16 @@ prop.enterFrame = function(){
 	for(i=0;i<prop.parasprites.length;i++){
 		if(prop.parasprites[i].life==0){
 			prop.parasprites[i].x += prop.parasprites[i].velX;
-			xxx = prop.parasprites[i].x-pony.coord.x;
-			yyy = prop.parasprites[i].y-pony.coord.y;
+			xxx = prop.parasprites[i].x-toad.coord.x;
+			yyy = prop.parasprites[i].y-toad.coord.y;
 			if( xxx>prop.parasprites[i].loop || xxx<-500){
 				prop.resetParasprite(i);
 			}
-			if( xxx>-pony.width*0.5 && xxx<pony.width*0.5 && yyy>-pony.height && yyy<0 ){
+			if( xxx>-toad.width*0.5 && xxx<toad.width*0.5 && yyy>-toad.height && yyy<0 ){
 				prop.parasprites[i].life = 20;
 				//alert("CAUGHT");
-				pony.vel.x*=1.1;
-				pony.vel.y*=1.2;
+				toad.vel.x*=1.1;
+				toad.vel.y*=1.2;
 				HUD.parasprites++;
 			}
 		}else{

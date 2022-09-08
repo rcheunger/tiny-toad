@@ -11,8 +11,8 @@ function musicLoopInit(){
 var music_source;
 if (music.canPlayType('audio/mpeg;')) {
     music.type= 'audio/mpeg';
-    music_source = 'music/WinterLoop.mp3';
+    music_source = 'music/Gachitoad.mp3';
 } else {
     music.type= 'audio/ogg';
-    music_source = 'music/WinterLoop.ogg';
+    music_source = 'music/Gachitoad.ogg';
 }

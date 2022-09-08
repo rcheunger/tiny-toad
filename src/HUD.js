@@ -55,29 +55,29 @@ HUD.draw = function(){
 }
 
 HUD.enterFrame = function(){
-	if(pony.startMoving){
+	if(toad.startMoving){
 		
 		HUD.awesome *= 3;
-		HUD.awesome += 0.02*(-0.04*pony.coord.y+pony.vel.x*1.2); // Originally 0.04 not 0.02. Halved for better judge of awesome.
+		HUD.awesome += 0.02*(-0.04*toad.coord.y+toad.vel.x*1.2); // Originally 0.04 not 0.02. Halved for better judge of awesome.
 		HUD.awesome *= 0.25;
 
 		var timerDecrease = Config.timer.constant;
-		var timerIncrease = pony.vel.x * Config.timer.speedMultiplier;
+		var timerIncrease = toad.vel.x * Config.timer.speedMultiplier;
 		HUD.timer -= timerDecrease;
 		HUD.timer += timerIncrease;
 		
-		if(HUD.groundvel<pony.vel.x){
-			HUD.groundvel = pony.vel.x;
+		if(HUD.groundvel<toad.vel.x){
+			HUD.groundvel = toad.vel.x;
 		}
-		if(HUD.maxalt < -pony.coord.y){
-			HUD.maxalt = -pony.coord.y;
+		if(HUD.maxalt < -toad.coord.y){
+			HUD.maxalt = -toad.coord.y;
 		} 
 	
 		if(HUD.timer<0){
 			HUD.timer = 0;
 			//alert("YOU LOSE");
 			if(HUD.endTimer==0){
-				if(pony.vel.x<2 && pony.touchGround2){
+				if(toad.vel.x<2 && toad.touchGround2){
 					HUD.endTimer=60;
 				}
 			}else{
@@ -100,7 +100,7 @@ HUD.enterFrame = function(){
 	
 	// POINTS
 	document.getElementById('points').innerHTML = HUD.points+"m";
-	HUD.points = Math.floor(pony.coord.x/100);
+	HUD.points = Math.floor(toad.coord.x/100);
 	if(HUD.points<0){
 		HUD.points=0;
 	}

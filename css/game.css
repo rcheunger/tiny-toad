@@ -17,12 +17,22 @@ canvas, #background, #screen, #screen>div {
 	position:absolute;
 	top:0;
 	left:0;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: -webkit-crisp-edges;
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
 }
+
+
 img {
 	border:0;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: -webkit-crisp-edges;
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
 }
 #background {
-	background-color:#9ce9f0;
+	background-color:#61e2ee;
 }
 #loading {
 	width:100%;
@@ -117,29 +127,6 @@ img {
 	width:130px;
 	color:#9a7fff;
 }
-#yougotta {
-	/*width:350px;*/
-	width:285px;
-	height:120px;
-}
-#yougotta .gotta_button {
-	float:left;
-	margin-right:5px;
-}
-.gotta_button.social {
-	width:55px;
-	height:70px;
-	overflow:hidden;
-}
-/*#yougotta > #caption{
-	float:left;
-	width:100%;
-	text-align:center;
-	font-size:12px;
-}*/
-/*.fb_like {
-	overflow: hidden;
-}*/
 #homeScreen {
 	position:absolute;
 	top:0;

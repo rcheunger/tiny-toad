@@ -13,9 +13,9 @@ prop.init = function(){
 		prop.trees = [{},{},{},{},{},{},{}];
 		prop.treeLength = 3;
 		prop.treePast = 1000;
-		pony.coord.x -= 800;
+		toad.coord.x -= 800;
 		prop.addTrees();
-		pony.coord.x += 800;
+		toad.coord.x += 800;
 	}
 	
 	// PARASPRITES
@@ -32,7 +32,7 @@ prop.addTrees = function(){
 		prop.treeLength = Math.ceil(3+Math.random()*4);
 		prop.treePast = 1000+Math.ceil(Math.random()*2000);
 		for(i=0;i<prop.treeLength;i++){
-			prop.trees[i].x = xxx+pony.coord.x;
+			prop.trees[i].x = xxx+toad.coord.x;
 			prop.trees[i].y = terrain.funct(prop.trees[i].x);
 			prop.trees[i].rotation = Math.atan( terrain.functDiff(prop.trees[i].x) );
 			prop.trees[i].type = Math.floor(Math.random()*3);
@@ -51,7 +51,7 @@ prop.addParasprites = function(){
 	}
 }
 prop.resetParasprite = function(i){
-	prop.parasprites[i].x = prop.parasprites[i].loop+pony.coord.x;
+	prop.parasprites[i].x = prop.parasprites[i].loop+toad.coord.x;
 	prop.parasprites[i].y = -Math.random()*400;
 	prop.parasprites[i].color = Math.floor( Math.random()*4 );
 	prop.parasprites[i].velX = 3+Math.random()*4;
@@ -63,7 +63,7 @@ prop.draw = function(){
 	var i;
 	for(i=0;i<prop.treeLength;i++){
 		ctx.save();
-		ctx.translate( prop.trees[i].x-pony.coord.x, prop.trees[i].y );
+		ctx.translate( prop.trees[i].x-toad.coord.x, prop.trees[i].y );
 		ctx.rotate(prop.trees[i].rotation);
 		ctx.drawImage( prop.image.tree, prop.trees[i].type*200,0,200,170, -200, -280, 400,340);
 		ctx.restore();
@@ -74,7 +74,7 @@ prop.drawParasprites = function(){
 	var i;
 	for(i=0;i<prop.parasprites.length;i++){
 		ctx.save();
-		ctx.translate(prop.parasprites[i].x-pony.coord.x,prop.parasprites[i].y);
+		ctx.translate(prop.parasprites[i].x-toad.coord.x,prop.parasprites[i].y);
 		if(prop.parasprites[i].life==0){
 			ctx.drawImage( prop.image.parasprite, prop.parasprites[i].color*100, Math.floor(prop.parasprites[i].flap)*100,100,100,
 							-50, -50, 100,100);
@@ -90,7 +90,7 @@ prop.drawParasprites = function(){
 // EnterFrame
 prop.enterFrame = function(){
 	if(!gameIsMobile){
-		if(prop.trees[prop.treeLength-1].x-pony.coord.x<-prop.treePast){
+		if(prop.trees[prop.treeLength-1].x-toad.coord.x<-prop.treePast){
 			prop.addTrees();
 		}
 	}
@@ -100,16 +100,16 @@ prop.enterFrame = function(){
 	for(i=0;i<prop.parasprites.length;i++){
 		if(prop.parasprites[i].life==0){
 			prop.parasprites[i].x += prop.parasprites[i].velX;
-			xxx = prop.parasprites[i].x-pony.coord.x;
-			yyy = prop.parasprites[i].y-pony.coord.y;
+			xxx = prop.parasprites[i].x-toad.coord.x;
+			yyy = prop.parasprites[i].y-toad.coord.y;
 			if( xxx>prop.parasprites[i].loop || xxx<-500){
 				prop.resetParasprite(i);
 			}
-			if( xxx>-pony.width*0.5 && xxx<pony.width*0.5 && yyy>-pony.height && yyy<0 ){
+			if( xxx>-toad.width*0.5 && xxx<toad.width*0.5 && yyy>-toad.height && yyy<0 ){
 				prop.parasprites[i].life = 20;
 				//alert("CAUGHT");
-				pony.vel.x*=1.1;
-				pony.vel.y*=1.2;
+				toad.vel.x*=1.1;
+				toad.vel.y*=1.2;
 				HUD.parasprites++;
 			}
 		}else{

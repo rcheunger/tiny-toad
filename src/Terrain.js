@@ -65,6 +65,7 @@ terrain.draw = function( starttt )
 {
 	// Later, ALL HEX?
 	ctx.lineWidth = 50;
+	
 	if(gameIsMobile){
 		ctx.strokeStyle = "rgb(170,200,47)"; // Top
 		ctx.fillStyle = "rgb(152,179,43)"; // Middle
@@ -84,7 +85,7 @@ terrain.drawFrom = function( starttt, yOff )
 	var tmpTerrYDraw = terrain.funct(starttt-terrain.drawFarBack);
 	ctx.moveTo( 0-terrain.drawFarBack, tmpTerrYDraw+yOff );
 	var i;
-	if(pony.startMoving){
+	if(toad.startMoving){
 		if(gameIsMobile){
 			if(TTG.gScale<0.35){
 				for( i=30-terrain.drawFarBack; i<=1440; i+=75 ){

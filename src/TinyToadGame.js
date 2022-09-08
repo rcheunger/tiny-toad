@@ -11,24 +11,24 @@ TTG.pauseGame = function(){
 }
 TTG.enterFrame = function(){
 	prop.enterFrame();
-	pony.enterFrame();
+	toad.enterFrame();
 	background.enterFrame();
 	HUD.enterFrame();
 	
-	// SCALE / (TRANSLATE DEPENDING ON PONY)
-	if(pony.startMoving){
+	// SCALE / (TRANSLATE DEPENDING ON TOAD)
+	if(toad.startMoving){
 		TTG.gScale*=9;
 		TTG.yDisp*=9;
-		if(pony.coord.y<-200){
-			TTG.yDisp += (pony.coord.y+100)*1; //Game height scale
+		if(toad.coord.y<-200){
+			TTG.yDisp += (toad.coord.y+100)*1; //Game height scale
 		}else{
 			TTG.yDisp += 0;
 		}
-		if(pony.touchGround3){
+		if(toad.touchGround3){
 			TTG.gScale += 0.7;
 			TTG.yDisp += 100;
 		}else{
-			if(pony.coord.y<-200){
+			if(toad.coord.y<-200){
 				TTG.gScale += 0.20; //Game scale in air
 			}else{
 				TTG.gScale += 0.26; //Game scale on ground
@@ -56,8 +56,8 @@ TTG.draw = function(){
 	
 	background.draw(); // Background
 	prop.draw(); // Props like Trees
-	terrain.draw(pony.coord.x); // Terrain
-	pony.draw(); // Pony Player
+	terrain.draw(toad.coord.x); // Terrain
+	toad.draw(); // Toad Player
 	prop.drawParasprites(); // Parasprites
 	HUD.draw(); // HUD
 	
@@ -73,7 +73,7 @@ TTG.init = function(){
 	menu.init();
 	HUD.init();
 	background.init();
-	pony.init();
+	toad.init();
 	terrain.init();
 	prop.init();
 }
@@ -85,7 +85,7 @@ TTG.loadArtAssets = function(){
 		TTG.artAssets -= 4;
 	}
 	
-	pony.image.onload =
+	toad.image.onload =
 	background.cloud.onload = 
 	prop.image.tree.onload = 
 	prop.image.parasprite.onload = 
@@ -93,7 +93,7 @@ TTG.loadArtAssets = function(){
 	HUD.timerImage.onload = 
 		TTG.onAssetLoad;
 	
-	pony.image.src = "art/Toad.png";
+	toad.image.src = "art/Toad.png";
 	prop.image.parasprite.src = "art/Parasprite.png";
 	HUD.timerImage.src = "art/Timer.png";
 	
