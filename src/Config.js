@@ -2,9 +2,9 @@
 
 exports.Config = {
 	
-	friction: 0.99, // Ground friction
+	friction: 1, // Ground friction
 	
-	power: 2,  // How much power Scoots has when you press the button
+	power: 1,  // How much power when you press the button
 	
 	// The Hilly Terrain (edit this later to very with zones)
 	hill: {

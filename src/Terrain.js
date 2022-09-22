@@ -67,14 +67,14 @@ terrain.draw = function( starttt )
 	ctx.lineWidth = 50;
 	
 	if(gameIsMobile){
-		ctx.strokeStyle = "rgb(170,200,47)"; // Top
-		ctx.fillStyle = "rgb(152,179,43)"; // Middle
+		ctx.strokeStyle = "rgb(142,177,76)"; // Top
+		ctx.fillStyle = "rgb(129,160,70)"; // Middle
 		terrain.drawFrom(starttt,25);
 	}else{
-		ctx.strokeStyle = "rgb(170,200,47)"; // Top
+		ctx.strokeStyle = "rgb(142,177,76)"; // Top
 		terrain.drawFrom(starttt,25);
-		ctx.strokeStyle = "rgb(152,179,43)"; // Middle
-		ctx.fillStyle = "#8FA927"; // Bottom 
+		ctx.strokeStyle = "rgb(129,160,70)"; // Middle
+		ctx.fillStyle = "#74903f"; // Bottom 
 		terrain.drawFrom(starttt,70);
 	}
 }
