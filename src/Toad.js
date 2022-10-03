@@ -9,8 +9,8 @@ toad.init = function(){
 	toad.vel.x = 1.9;
 	toad.vel.y = -0.9;
 	toad.rotation = 0;
-	toad.width = 175;
-	toad.height = 200;
+	toad.width = 125;
+	toad.height = 225;
 	toad.frame = 0;
 	
 	toad.touchGround = true;

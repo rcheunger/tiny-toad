@@ -191,7 +191,7 @@ kCont.keyDownHandler = function(event){
 }
 kCont.keyUpHandler = function(event){
 	kCont.down = false;
-	//alert("Key Up"); FUcksdsllls
+	//alert("Key Up"); 
 }
 var menu = {};
 
@@ -305,11 +305,12 @@ toad.init = function(){
 	toad.width = toad.height = 200;
 	toad.frame = 0;
 	
-	toad.touchGround = true;
-	toad.touchGround2 = true;
-	toad.touchGround3 = false;
+	toad.touchGround = true; //keyup, on ground
+	toad.touchGround2 = false; //keydown
+	toad.touchGround3 = false; //air
 	toad.keyDown = false;
 }
+
 toad.startMoving = false;
 
 toad.draw = function()
@@ -783,7 +784,7 @@ prop.addTrees = function(){
 prop.addParasprites = function(){
 	var i;
 	for(i=0;i<prop.parasprites.length;i++){
-		prop.parasprites[i].loop = 2000+Math.floor( Math.random()*2000 );
+		prop.parasprites[i].loop = 5000+Math.floor( Math.random()*5000 );
 		prop.parasprites[i].flap = 0;
 		prop.resetParasprite(i);
 	}

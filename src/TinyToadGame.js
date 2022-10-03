@@ -1,6 +1,33 @@
 var TTG = {};
 TTG.timer_enterFrame = null;
 TTG.timer_draw = null;
+let peepingPines = true
+let slimeyForest = false
+let ravensRedwoods = false
+let goldenGrove = false
+let mysticalMangroves = false
+
+//Zones
+if (HUD.points > 0 && HUD.points < 100) {
+	peepingPines == true
+}
+if (HUD.points > 100 && HUD.points < 200) {
+	peepingPines == false
+	slimeyForest == true
+}
+if (HUD.points > 200 && HUD.points < 300) {
+	slimeyForest == false
+	ravensRedwoods == true
+}
+if (HUD.points > 300 && HUD.points < 400) {
+	ravensRedwoods == false
+	goldenGrove == true
+}
+if (HUD.points > 400 && HUD.points < 500) {
+	goldenGrove == false
+	mysticalMangroves == true
+}
+
 TTG.playGame = function(){
 	TTG.timer_enterFrame = setInterval(TTG.enterFrame,enterFrameRate);
 	TTG.timer_draw = setInterval(TTG.draw,drawFrameRate);
@@ -98,9 +125,6 @@ TTG.loadArtAssets = function(){
 	HUD.timerImage.src = "art/Timer.png";
 	
 	if(!gameIsMobile){
-		background.cloud.src = "art/Cloud.png";
-		prop.image.tree.src = "art/Tree.png";
-		prop.image.burst.src = "art/Burst.png";
 		// Music
 		music.src = music_source;
 		music.addEventListener('canplaythrough', function(){
@@ -110,6 +134,19 @@ TTG.loadArtAssets = function(){
 		}, false);
 		music.load();
 	}
+
+	if(!gameIsMobile && peepingPines == true){
+		background.cloud.src = "art/Cloud.png";
+		prop.image.tree.src = "art/Tree.png";
+		prop.image.burst.src = "art/Burst.png";
+	}
+
+	if(!gameIsMobile && slimeyForest == true){
+		background.cloud.src = "art/Cloud.png";
+		prop.image.tree.src = "art/Tree.png";
+		prop.image.burst.src = "art/Burst.png";
+	}
+	
 	
 }
 
